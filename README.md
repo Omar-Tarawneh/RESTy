@@ -4,7 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## UML
 
-![uml](./assets/lab26.png)
+- UML: ![uml](./assets/lab26.png)
+
+- [sandbox](https://codesandbox.io/s/eager-cloud-q7opl)
 
 ## Available Scripts
 
