@@ -1,7 +1,11 @@
 import './Footer.scss';
 
 const Footer = () => {
-  return <footer>&copy; 2021 Code Fellows</footer>;
+  return (
+    <footer>
+      <p>&copy; 2021 Code Fellows</p>
+    </footer>
+  );
 };
 
 export default Footer;
