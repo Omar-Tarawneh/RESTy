@@ -2,7 +2,7 @@ import './App.scss';
 import Header from './Header';
 import Footer from './Footer';
 import Form from './Form';
-import Result from './Result.js';
+import Result from './Result';
 import React, { Component } from 'react';
 
 class App extends Component {
