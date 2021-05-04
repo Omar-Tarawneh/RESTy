@@ -12,7 +12,7 @@ const Form = (props) => {
     props.handleResult({
       header: { Content_Type: raw.headers.get('Content-Type') },
       count: response.count,
-      results: response.results,
+      results: response,
     });
   };
 
