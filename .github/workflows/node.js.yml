@@ -12,9 +12,3 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Deploy to GH Pages
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git remote set-url origin https://${{ secrets.PERSONAL_TOKEN }}@github.com/${{ github.repository }}.git
-          npm install
-          npm run deploy
