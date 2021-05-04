@@ -39,7 +39,7 @@ const Form = (props) => {
     <form onSubmit={handleSubmit}>
       <label htmlFor="url">
         url:
-        <input type="text" name="url" id="url" value={props.api.url} />
+        <input type="text" name="url" id="url" defaultValue={props.api.url} />
       </label>
       <button type="submit">Go!</button>
       <br />
