@@ -57,17 +57,24 @@ class Form extends React.Component {
         <label htmlFor="url">
           url:
           <input
-            type="text"
+            type="url"
             name="url"
             id="url"
             defaultValue={this.props.api.url || this.props.historyStorage?.url}
+            required
           />
         </label>
         <button type="submit">Go!</button>
         <br />
         <label htmlFor="method">
           GET
-          <input type="radio" name="method" id="GET" value="GET" />
+          <input
+            type="radio"
+            name="method"
+            id="GET"
+            value="GET"
+            defaultChecked
+          />
         </label>
 
         <label htmlFor="method">
