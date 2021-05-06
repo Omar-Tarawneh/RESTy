@@ -1,111 +1,101 @@
 import './Form.scss';
 import React from 'react';
 
-const Form = (props) => {
-  const handleSubmit = async (event) => {
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  handleSubmit = async (event) => {
     event.preventDefault();
     const url = event.target.url.value;
     const method = event.target.method.value;
     const body = event.target.body.value;
     if (method === 'GET') {
-      props.toggle();
+      this.props.toggle();
       const raw = await fetch(url);
       const response = await raw.json();
-      props.handleResult({
+      this.props.handleResult({
         header: { Content_Type: raw.headers.get('Content-Type') },
         count: response.count,
         results: response,
       });
-      props.storage({ url, method, response });
-      props.toggle();
+      this.props.storage({ url, method, response });
+      this.props.toggle();
     } else {
-      props.toggle();
+      this.props.toggle();
       const raw = await fetch(url, {
         method: method,
         body: JSON.stringify(body),
       });
       const response = await raw.json();
-      props.handleResult({
+      this.props.handleResult({
         header: { Content_Type: raw.headers.get('Content-Type') },
         count: response.count,
         results: response,
       });
-      props.storage({ url, method, response });
-      props.toggle();
+      this.props.storage({ url, method, response });
+      this.props.toggle();
     }
   };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="url">
-        url:
-        <input type="text" name="url" id="url" defaultValue={props.api.url} />
-      </label>
-      <button type="submit">Go!</button>
-      <br />
-      <label htmlFor="method">
-        GET
-        {props.api.method === 'GET' ? (
+  componentDidMount() {
+    if (this.props.historyStorage) {
+      let input = document.getElementById(this.props.historyStorage.method);
+      input.checked = true;
+    }
+  }
+  componentDidUpdate() {
+    if (this.props.api.method !== '') {
+      console.log('true', this.props.api);
+      let input = document.getElementById(this.props.api.method);
+      input.checked = true;
+    }
+  }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor="url">
+          url:
+          <input
+            type="url"
+            name="url"
+            id="url"
+            defaultValue={this.props.api.url || this.props.historyStorage?.url}
+            required
+          />
+        </label>
+        <button type="submit">Go!</button>
+        <br />
+        <label htmlFor="method">
+          GET
           <input
             type="radio"
             name="method"
             id="GET"
             value="GET"
-            checked={true}
+            defaultChecked
           />
-        ) : (
-          <input type="radio" name="method" id="GET" value="GET" />
-        )}
-      </label>
+        </label>
 
-      <label htmlFor="method">
-        POST
-        {props.api.method === 'POST' ? (
-          <input
-            type="radio"
-            name="method"
-            id="POST"
-            value="POST"
-            checked={props.api.method === 'POST'}
-          />
-        ) : (
+        <label htmlFor="method">
+          POST
           <input type="radio" name="method" id="POST" value="POST" />
-        )}
-      </label>
-      <label htmlFor="method">
-        PUT
-        {props.api.method === 'PUT' ? (
-          <input
-            type="radio"
-            name="method"
-            id="PUT"
-            value="PUT"
-            checked={true}
-          />
-        ) : (
+        </label>
+        <label htmlFor="method">
+          PUT
           <input type="radio" name="method" id="PUT" value="PUT" />
-        )}
-      </label>
+        </label>
 
-      <label htmlFor="method">
-        DELETE
-        {props.api.method === 'DELETE' ? (
-          <input
-            type="radio"
-            name="method"
-            id="DELETE"
-            value="DELETE"
-            checked={true}
-          />
-        ) : (
+        <label htmlFor="method">
+          DELETE
           <input type="radio" name="method" id="DELETE" value="DELETE" />
-        )}
-      </label>
-      <label htmlFor="body">
-        <textarea name="body" id="body" cols="30" rows="10"></textarea>
-      </label>
-    </form>
-  );
-};
+        </label>
+        <label htmlFor="body">
+          <textarea name="body" id="body" cols="30" rows="10"></textarea>
+        </label>
+      </form>
+    );
+  }
+}
 
 export default Form;

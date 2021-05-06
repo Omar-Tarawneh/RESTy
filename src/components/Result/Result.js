@@ -9,7 +9,11 @@ function Result({ data, loading }) {
           <div>Loading... </div>
         </Then>
         <Else>
-          <ReactJson name={false} src={data} theme="rjv-default" />
+          <If condition={data.results.length}>
+            <Then>
+              <ReactJson name={false} src={data} theme="rjv-default" />
+            </Then>
+          </If>
         </Else>
       </If>
     </div>
