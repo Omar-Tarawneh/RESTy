@@ -30,8 +30,13 @@ class App extends Component {
     this.setState({ ...response });
   }
   historyStorage(call) {
-    this.setState({ history: [...this.state.history, call] });
-    localStorage.setItem('api calls', JSON.stringify(this.state.history));
+    let arr = this.state.history.filter((el) => {
+      return call.method === el.method && call.url === el.url;
+    });
+    if (!arr.length) {
+      this.setState({ history: [...this.state.history, call] });
+      localStorage.setItem('api calls', JSON.stringify(this.state.history));
+    }
   }
   callback(api) {
     this.setState({ callback: api });
@@ -46,6 +51,7 @@ class App extends Component {
             toggle={this.toggleLoading}
             storage={this.historyStorage}
             api={this.state.callback}
+            historyStorage={this.props.location?.state}
           />
           <div id="result-aside">
             <aside>

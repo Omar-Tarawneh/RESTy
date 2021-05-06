@@ -11,7 +11,7 @@ const History = (props) => {
       <Then>
         {props.calls.map((data, index) => {
           return (
-            <div onClick={UrlValue} key={index} class="history">
+            <div onClick={UrlValue} key={index} className="history">
               {data.method} {data.url}
             </div>
           );

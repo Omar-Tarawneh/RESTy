@@ -2,8 +2,26 @@ header {
   min-height: 70px;
   margin-bottom: 15px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background-color: rgb(15, 14, 14);
   color: white;
+  nav {
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      li {
+        margin-left: 15px;
+      }
+    }
+  }
+}
+.active {
+  text-decoration: none;
+  color: white;
+}
+a {
+  color: blanchedalmond;
 }
